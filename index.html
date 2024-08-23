@@ -92,6 +92,22 @@
         .dashboard-links a:hover {
             text-decoration: underline;
         }
+
+        /* iframe styling */
+        .iframe-standard {
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .iframe-covid {
+            width: 800px; /* Set width in pixels */
+            height: 600px; /* Set height in pixels */
+        }
+        .iframe-census {
+            width: 800px; /* Set width in pixels */
+            height: 450px; /* Set height in pixels */
+        }
     </style>
 </head>
 <body>
@@ -119,18 +135,7 @@
     <div id="COVID_19_Dashboard" style="display:none;">
         <h1>COVID 19 Dashboard</h1>
         <p>This dashboard provides insights from COVID-19 data from eight countries: Thailand, Mexico, Japan, Germany, Egypt, Brazil, highlighting the number of confirmed cases, recovered cases, deaths from 22 January 2020 to 16 April 2022. Combination of timeseries chart and score card can ensure better visibility of the trends with number.</p>
-        <style>
-            /* iframe styling */
-            iframe {
-                display: block;
-                margin: 20px auto;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                width: 800px; /* Set width in pixels */
-                height: 600px; /* Set height in pixels */
-            }
-        </style>
-        <iframe class="dashboard-iframe" src="https://lookerstudio.google.com/embed/reporting/6d890109-00c6-4138-846b-0bdf4232b020/page/HrD4D" frameborder="0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <iframe class="iframe-standard iframe-covid" src="https://lookerstudio.google.com/embed/reporting/6d890109-00c6-4138-846b-0bdf4232b020/page/HrD4D" frameborder="0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
         <div class="footer">
             <a href="mailto:data@thura.info">Contact Me</a>
             <span>&nbsp;&nbsp;&nbsp;</span>
@@ -144,18 +149,7 @@
     <div id="Myanmar_Census_2014_Dashboard" style="display:none;">
         <h1>Myanmar Census 2014 Dashboard</h1>
         <p>This dashboard provides insights from the Myanmar Census 2014, highlighting key demographic, literacy, citizenship, sanitation, and relevant population data across the country. Use the interactive tools below to explore the data and gain a deeper understanding of the population distribution and trends in each region. The source of data can be found in this link: https://www.dop.gov.mm/en/data-and-maps-category/2014-census-data.</p>
-        <style>
-            /* iframe styling */
-            iframe {
-                display: block;
-                margin: 20px auto;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                width: 800px; /* Set width in pixels */
-                height: 450px; /* Set height in pixels */
-            }
-        </style>
-        <iframe class="dashboard-iframe" src="https://lookerstudio.google.com/embed/reporting/9cc389f0-edff-4dcf-8ded-c9b0dcc65580/page/EaM9D" frameborder="0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <iframe class="iframe-standard iframe-census" src="https://lookerstudio.google.com/embed/reporting/9cc389f0-edff-4dcf-8ded-c9b0dcc65580/page/EaM9D" frameborder="0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
         <div class="footer">
             <a href="mailto:data@thura.info">Contact Me</a>
             <span>&nbsp;&nbsp;&nbsp;</span>
