@@ -97,8 +97,8 @@
 <body>
 
 <div class="navbar">
-    <a href="#" onclick="showPage('home')">Home</a>
-    <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+    <a href="#home">Home</a>
+    <a href="#dashboard">Dashboard</a>
 </div>
 
 <div class="content" id="content">
@@ -109,10 +109,10 @@
     <div id="dashboard" style="display:none;">
         <h1>Choose a Dashboard</h1>
         <div class="dashboard-links">
-            <a href="#" onclick="showPage('dashboard1')">COVID 19 Dashboard</a>
-            <a href="#" onclick="showPage('dashboard2')">Myanmar Census 2014 Dashboard</a>
-            <a href="#" onclick="showPage('dashboard3')">Dashboard 3</a>
-            <a href="#" onclick="showPage('dashboard4')">Dashboard 4</a>
+            <a href="#dashboard1">COVID 19 Dashboard</a>
+            <a href="#dashboard2">Myanmar Census 2014 Dashboard</a>
+            <a href="#dashboard3">Dashboard 3</a>
+            <a href="#dashboard4">Dashboard 4</a>
         </div>
     </div>
     <!-- Add individual dashboard pages here -->
@@ -174,12 +174,22 @@
         document.querySelectorAll('.content > div').forEach(div => div.style.display = 'none');
         
         // Show the selected section
-        document.getElementById(page).style.display = 'block';
+        const section = document.getElementById(page);
+        if (section) {
+            section.style.display = 'block';
+        }
     }
 
-    // Initialize to show home page by default
+    // Function to handle hash changes
+    function handleHashChange() {
+        const hash = window.location.hash.substring(1); // Remove '#' from the hash
+        showPage(hash || 'home'); // Show the section based on hash or default to home
+    }
+
+    // Initialize to show the page based on hash or default to home
     document.addEventListener('DOMContentLoaded', function() {
-        showPage('home');
+        handleHashChange();
+        window.addEventListener('hashchange', handleHashChange);
     });
 </script>
 
