@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Aung Thura Htoo</title>
+
+  <!-- ============================================================
+       FONTS
+       Using Syne (display) + DM Mono (body/code) for a sharp,
+       editorial-tech hybrid feel.
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES — Warm Blog Design Tokens
+    ============================================================ */
+    :root {
+      --bg:           #faf7f2;      /* warm parchment canvas            */
+      --surface:      #ffffff;      /* card / panel backgrounds         */
+      --surface2:     #f5f0e8;      /* soft warm grey panels            */
+      --border:       #e8dfd0;      /* warm sand borders                */
+      --border2:      #d4c9b5;      /* slightly darker border           */
+      --accent:       #c0622a;      /* warm terracotta / burnt orange   */
+      --accent-light: #f0ebe3;      /* accent tint for backgrounds      */
+      --accent2:      #7a6e5f;      /* warm taupe secondary             */
+      --accent3:      #d4923c;      /* golden amber                     */
+      --accent4:      #5a7a6e;      /* muted sage green                 */
+      --text:         #2c2416;      /* deep warm brown body text        */
+      --text2:        #4a3f30;      /* slightly lighter body text       */
+      --muted:        #9a8f80;      /* warm grey muted text             */
+      --muted2:       #c4b9a8;      /* lighter muted for labels         */
+      --danger:       #c04040;      /* muted red                        */
+      --font-display: 'Lora', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+      --radius:       10px;
+      --radius-sm:    6px;
+      --transition:   0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+    /* ============================================================
+       LAYOUT — sidebar + main
+    ============================================================ */
+    #app { display: flex; min-height: 100vh; }
+
+    /* ============================================================
+       SIDEBAR / NAV
+    ============================================================ */
+    #sidebar {
+      width: 230px;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 36px 0;
+      z-index: 100;
+      transition: transform var(--transition);
+    }
+
+    /* Logo / brand */
+    .nav-brand {
+      padding: 0 28px 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .nav-brand .monogram {
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .nav-brand .site-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .nav-brand .site-role {
+      font-size: 11.5px;
+      color: var(--muted);
+      letter-spacing: .04em;
+      margin-top: 3px;
+      font-family: var(--font-body);
+    }
+
+    /* Nav links */
+    .nav-links { list-style: none; padding: 0 14px; flex: 1; }
+    .nav-links li { margin-bottom: 2px; }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      border: none; background: transparent; width: 100%; text-align: left;
+    }
+    .nav-link:hover { background: var(--surface2); color: var(--text2); }
+    .nav-link.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+    .nav-link .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+
+    /* Nav footer */
+    .nav-footer {
+      padding: 16px 28px 0;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .nav-footer .status-dot {
+      width: 7px; height: 7px;
+      background: var(--accent4);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 7px;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+    .nav-footer small { font-size: 11.5px; color: var(--muted); }
+
+    /* ============================================================
+       MOBILE HAMBURGER
+    ============================================================ */
+    #hamburger {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 200;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+    #main {
+      margin-left: 230px;
+      flex: 1;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       PAGE SECTIONS
+    ============================================================ */
+    .page { display: none; animation: fadeUp .35s ease both; }
+    .page.active { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section header */
+    .page-header {
+      padding: 52px 60px 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 32px;
+      margin-bottom: 48px;
+    }
+    .page-tag {
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-family: var(--font-body);
+      font-weight: 500;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+    .page-subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      max-width: 540px;
+      font-size: 14.5px;
+      font-family: var(--font-body);
+    }
+
+    /* ============================================================
+       INNER PAGE CONTENT AREA
+    ============================================================ */
+    .page-body { padding: 0 60px 80px; }
+
+    /* ============================================================
+       ─── HOME PAGE ──────────────────────────────────────────────
+    ============================================================ */
+    .hero {
+      padding: 72px 60px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle warm texture on hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 90% 10%, rgba(192,98,42,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(212,146,60,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      position: relative;
+      font-family: var(--font-body);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1.5px;
+      background: var(--accent);
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.5vw, 62px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -1px;
+      color: var(--text);
+      position: relative;
+      max-width: 680px;
+    }
+    .hero-headline .highlight {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .hero-body {
+      margin-top: 24px;
+      color: var(--text2);
+      font-size: 16px;
+      max-width: 500px;
+      line-height: 1.8;
+      position: relative;
+      font-family: var(--font-body);
+    }
+    .hero-cta {
+      margin-top: 38px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px;
+      border-radius: 99px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #a8531f; box-shadow: 0 4px 20px rgba(192,98,42,.3); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text2);
+      border: 1.5px solid var(--border2);
+    }
+    .btn-ghost:hover { background: var(--surface2); border-color: var(--accent2); }
+
+    /* Stat strip */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 0 60px 56px;
+    }
+    .stat-cell {
+      background: var(--surface);
+      padding: 26px 30px;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .stat-label { font-size: 11.5px; color: var(--muted); margin-top: 4px; letter-spacing: .04em; font-family: var(--font-body); }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 60px 48px;
+    }
+
+    /* ============================================================
+       ─── ABOUT PAGE ─────────────────────────────────────────────
+    ============================================================ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 48px;
+      align-items: start;
+    }
+    .about-text p {
+      margin-bottom: 18px;
+      color: var(--text2);
+      line-height: 1.85;
+      font-size: 15px;
+      font-family: var(--font-body);
+    }
+    .about-text p strong { color: var(--text); }
+
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .about-card h4 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text2);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 5px 13px;
+      font-size: 12.5px;
+      color: var(--text2);
+      margin: 4px 3px;
+      font-family: var(--font-body);
+    }
+    .skill-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .dot-green  { background: var(--accent4); }
+    .dot-purple { background: var(--accent2); }
+    .dot-amber  { background: var(--accent3); }
+    .dot-red    { background: var(--accent); }
+
+    .timeline { list-style: none; margin-top: 8px; }
+    .timeline li {
+      padding: 13px 0 13px 20px;
+      border-left: 2px solid var(--border);
+      position: relative;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: var(--font-body);
+    }
+    .timeline li::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: absolute;
+      left: -5px; top: 19px;
+    }
+    .timeline li strong { display: block; color: var(--text); margin-bottom: 2px; font-size: 13.5px; }
+    .timeline li span { font-size: 11px; color: var(--accent3); font-weight: 500; letter-spacing: .04em; }
+
+    /* ── About page — bio grid ─────────────────────────────── */
+    .about-bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── Section label (Education / Work / Certs) ──────────── */
+    .about-section-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .about-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin-left: 4px;
+    }
+
+    /* ── Experience / Education items ──────────────────────── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .exp-item {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-icon {
+      width: 42px; height: 42px;
+      background: var(--accent-light);
+      border: 1px solid rgba(192,98,42,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .exp-body { flex: 1; }
+    .exp-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .exp-org {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3px;
+      font-family: var(--font-body);
+    }
+    .exp-period {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-body);
+      margin-bottom: 8px;
+      letter-spacing: .03em;
+    }
+    .exp-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+      font-family: var(--font-body);
+    }
+
+    /* ── Certificates grid ─────────────────────────────────── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .cert-card:hover {
+      border-color: var(--border2);
+      box-shadow: 0 4px 16px rgba(44,36,22,.07);
+    }
+    .cert-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      background: var(--surface2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.35;
+      margin-bottom: 3px;
+    }
+    .cert-issuer {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-body);
+    }
+
+    @media (max-width: 900px) {
+      .about-bio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── End About additions ────────────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: default;
+    }
+    .card:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(44,36,22,.08);
+    }
+
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .icon-green  { background: rgba(90,122,110,.12); }
+    .icon-purple { background: rgba(122,110,95,.12); }
+    .icon-amber  { background: rgba(212,146,60,.12); }
+    .icon-red    { background: rgba(192,98,42,.12); }
+    .icon-blue   { background: rgba(90,110,140,.12); }
+
+    .card-badge {
+      font-size: 10.5px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-weight: 500;
+      font-family: var(--font-body);
+    }
+    .badge-live    { background: rgba(90,122,110,.12); color: var(--accent4); }
+    .badge-wip     { background: rgba(212,146,60,.12); color: var(--accent3); }
+    .badge-archive { background: rgba(154,143,128,.12); color: var(--muted); }
+    .badge-new     { background: rgba(192,98,42,.12); color: var(--accent); }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .card-desc { font-size: 13.5px; color: var(--text2); line-height: 1.65; flex: 1; font-family: var(--font-body); }
+
+    .card-meta { display: flex; gap: 7px; flex-wrap: wrap; }
+    .meta-tag {
+      font-size: 11.5px;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 3px 11px;
+      font-family: var(--font-body);
+    }
+
+    /* Card actions row */
+    .card-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .card-btn {
+      flex: 1;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 9px 14px;
+      border-radius: 99px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      border: 1.5px solid var(--border2);
+      background: transparent;
+      color: var(--muted);
+    }
+    .card-btn:hover { background: var(--surface2); color: var(--text2); }
+    .card-btn.primary {
+      background: var(--accent-light);
+      border-color: rgba(192,98,42,.3);
+      color: var(--accent);
+    }
+    .card-btn.primary:hover { background: rgba(192,98,42,.15); }
+
+    /* ============================================================
+       ─── DASHBOARD ──────────────────────────────────────────────
+    ============================================================ */
+    .chart-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 52px;
+      margin-top: 8px;
+    }
+    .bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, var(--accent3) 0%, rgba(212,146,60,.15) 100%);
+      transition: height var(--transition), opacity var(--transition);
+    }
+    .card:hover .bar { opacity: .75; }
+    .dashboard-top {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .kpi-card:hover { border-color: var(--accent3); box-shadow: 0 4px 16px rgba(212,146,60,.1); }
+    .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; font-family: var(--font-body); }
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .kpi-delta { font-size: 12px; margin-top: 6px; font-family: var(--font-body); }
+    .delta-up   { color: var(--accent4); }
+    .delta-down { color: var(--danger); }
+
+    /* ============================================================
+       ─── MODAL OVERLAY ──────────────────────────────────────────
+    ============================================================ */
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44,36,22,.55);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 88vh;
+      overflow-y: auto;
+      animation: scaleIn .25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(.93); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .modal-header {
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+      position: sticky; top: 0; background: var(--surface); z-index: 1;
+    }
+    .modal-close {
+      width: 32px; height: 32px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      color: var(--muted);
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .modal-close:hover { color: var(--text); background: var(--border); }
+    .modal-body { padding: 28px 32px 32px; }
+    .modal-body p { color: var(--text2); font-size: 14.5px; line-height: 1.8; margin-bottom: 16px; font-family: var(--font-body); }
+    .modal-body h3 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 24px 0 10px;
+    }
+    .modal-body ul { list-style: none; padding: 0; }
+    .modal-body ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text2);
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-body);
+    }
+    .modal-body ul li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+    .modal-footer {
+      padding: 20px 32px 28px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 12px;
+    }
+
+    /* Code block in modal */
+    .code-block {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--text2);
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+    .code-block .comment { color: var(--muted); font-style: italic; }
+    .code-block .keyword { color: var(--accent); }
+    .code-block .string  { color: var(--accent3); }
+
+    /* ============================================================
+       FILTER BAR
+    ============================================================ */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border2);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover { background: var(--surface2); color: var(--text2); }
+    .filter-btn.active {
+      background: var(--accent-light);
+      border-color: rgba(192,98,42,.35);
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       SEARCH BAR
+    ============================================================ */
+    .search-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .search-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 99px;
+      padding: 10px 20px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .search-input::placeholder { color: var(--muted2); }
+    .search-input:focus { border-color: var(--accent); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      #sidebar { transform: translateX(-100%); }
+      #sidebar.open { transform: translateX(0); }
+      #main { margin-left: 0; }
+      #hamburger { display: flex; align-items: center; justify-content: center; }
+      .page-header, .hero { padding-left: 24px; padding-right: 24px; }
+      .page-body { padding: 0 24px 60px; }
+      .hero { padding-top: 72px; }
+      .dashboard-top { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .stat-strip { margin: 0 24px 44px; }
+      .section-divider { margin: 0 24px 44px; }
+    }
+    @media (max-width: 540px) {
+      .dashboard-top { grid-template-columns: 1fr; }
+      .hero-headline { letter-spacing: -.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     MOBILE HAMBURGER BUTTON
+============================================================ -->
+<button id="hamburger" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
+
+<div id="app">
+
+  <!-- ============================================================
+       SIDEBAR NAVIGATION
+  ============================================================ -->
+  <nav id="sidebar" role="navigation" aria-label="Main navigation">
+
+    <!-- Brand / Logo -->
+    <div class="nav-brand">
+      <div class="monogram">AT</div>
+      <div class="site-name">Aung Thura Htoo</div>
+      <div class="site-role">Health Data Analyst</div>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li>
+        <!-- HOME link -->
+        <button class="nav-link active" onclick="showPage('home', this)" aria-current="page">
+          <span class="nav-icon">⌂</span> Home
+        </button>
+      </li>
+      <li>
+        <!-- ABOUT ME link -->
+        <button class="nav-link" onclick="showPage('about', this)">
+          <span class="nav-icon">◎</span> About Me
+        </button>
+      </li>
+      <li>
+        <!-- DASHBOARD link -->
+        <button class="nav-link" onclick="showPage('dashboard', this)">
+          <span class="nav-icon">▦</span> Dashboard
+        </button>
+      </li>
+      <li>
+        <!-- DATA PROJECTS link -->
+        <button class="nav-link" onclick="showPage('projects', this)">
+          <span class="nav-icon">◈</span> Data Projects
+        </button>
+      </li>
+      <li>
+        <!-- RESEARCH link -->
+        <button class="nav-link" onclick="showPage('research', this)">
+          <span class="nav-icon">⊞</span> Research
+        </button>
+      </li>
+    </ul>
+
+    <!-- Status indicator -->
+    <div class="nav-footer">
+      <span class="status-dot"></span>
+      <small>Open to opportunities</small>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT AREA
+  ============================================================ -->
+  <main id="main" role="main">
+
+    <!-- ══════════════════════════════════════════════════════════
+         HOME PAGE
+    ══════════════════════════════════════════════════════════ -->
+    <section id="page-home" class="page active" aria-label="Home">
+
+      <!-- Hero section -->
+      <div class="hero">
+        <div class="hero-eyebrow">hello, welcome</div>
+        <h1 class="hero-headline">
+          Public health meets<br/><span class="highlight">data-driven insight</span>
+        </h1>
+        <p class="hero-body">
+          MD &amp; MSc BHI candidate with hands-on experience in health informatics, 
+          telemedicine, and analytical dashboards — turning messy health data into 
+          actionable decisions across Southeast Asia and beyond.
+        </p>
+        <div class="hero-cta">
+          <!-- CTA buttons navigate to relevant sections -->
+          <button class="btn btn-primary" onclick="showPage('projects', document.querySelector('[onclick*=projects]'))">
+            View Projects →
+          </button>
+          <button class="btn btn-ghost" onclick="showPage('about', document.querySelector('[onclick*=about]'))">
+            About Me
+          </button>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/aungthurahtoo" target="_blank" rel="noopener noreferrer">
+            LinkedIn ↗
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/AungThuraHtoo" target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick stats strip -->
+      <div class="stat-strip">
+        <div class="stat-cell">
+          <div class="stat-value">9</div>
+          <div class="stat-label">Data Projects</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Dashboards</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Publication</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value">3+</div>
+          <div class="stat-label">Years Freelancing</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ABOUT ME PAGE
+    ══════════════════════════════════════════════════════════ -->
+    <section id="page-about" class="page" aria-label="About Me">
+      <div class="page-header">
+        <div class="page-tag">About</div>
+        <h2 class="page-title">About Me</h2>
+        <p class="page-subtitle">Background, skills, and the story behind the work.</p>
+      </div>
+      <div class="page-body">
+
+        <!-- ── Bio + Skills ───────────────────────────────────── -->
+        <div class="about-section-label">Introduction</div>
+        <div class="about-bio-grid">
+          <div class="about-text">
+            <p>Hi — I'm <strong>Aung Thura Htoo</strong>, a public health practitioner and data analyst based in Thailand. I hold an MD and a Bachelor of Health Science, and I'm currently pursuing an MSc in Biomedical &amp; Health Informatics at Mahidol University.</p>
+            <p>My work spans <strong>health information systems</strong>, telemedicine, and interactive data analytics. I've worked in IDP camps and border health settings, and I currently serve as a Health Information System Technical Consultant at Mae Tao Clinic.</p>
+            <p>I'm skilled in improving <strong>data quality, clinical reporting, and decision-making</strong> using R, SQL, Power BI, and Looker Studio. I care deeply about applying data science to real-world public health challenges in low-resource and crisis settings.</p>
+          </div>
+          <div class="about-card">
+            <h4>Skills</h4>
+            <div>
+              <span class="skill-tag"><span class="skill-dot dot-green"></span> R</span>
+              <span class="skill-tag"><span class="skill-dot dot-green"></span> Python</span>
+              <span class="skill-tag"><span class="skill-dot dot-amber"></span> SQL</span>
+              <span class="skill-tag"><span class="skill-dot dot-purple"></span> Power BI</span>
+              <span class="skill-tag"><span class="skill-dot dot-purple"></span> Looker Studio</span>
+              <span class="skill-tag"><span class="skill-dot dot-amber"></span> Machine Learning</span>
+              <span class="skill-tag"><span class="skill-dot dot-green"></span> Dashboard Design</span>
+              <span class="skill-tag"><span class="skill-dot dot-red"></span> Health Informatics</span>
+              <span class="skill-tag"><span class="skill-dot dot-purple"></span> Statistics</span>
+              <span class="skill-tag"><span class="skill-dot dot-amber"></span> Data Analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Education ─────────────────────────────────────── -->
+        <div class="about-section-label" style="margin-top:48px;">Education</div>
+        <div class="exp-list">
+
+          <div class="exp-item">
+            <div class="exp-icon">🎓</div>
+            <div class="exp-body">
+              <div class="exp-title">MSc Biomedical &amp; Health Informatics</div>
+              <div class="exp-org">Mahidol University, Thailand</div>
+              <div class="exp-period">2024 — Present</div>
+              <div class="exp-desc">Specialising in health information systems, digital health, and biomedical data analytics.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-icon">🎓</div>
+            <div class="exp-body">
+              <div class="exp-title">Bachelor of Health Science (BS HS)</div>
+              <div class="exp-org">University of the People</div>
+              <div class="exp-period">2022 — 2024</div>
+              <div class="exp-desc">CGPA 3.78 / 4.00. Focused on public health, epidemiology, and health systems management.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-icon">🎓</div>
+            <div class="exp-body">
+              <div class="exp-title">Bachelor of Medicine, Bachelor of Surgery (MBBS)</div>
+              <div class="exp-org">University of Medicine, Mandalay, Myanmar</div>
+              <div class="exp-period">Completed</div>
+              <div class="exp-desc">Foundation in clinical medicine, anatomy, physiology, and public health practice.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Work Experience ───────────────────────────────── -->
+        <div class="about-section-label" style="margin-top:48px;">Work Experience</div>
+        <div class="exp-list">
+
+          <div class="exp-item">
+            <div class="exp-icon">💼</div>
+            <div class="exp-body">
+              <div class="exp-title">Health Information System Technical Consultant</div>
+              <div class="exp-org">Mae Tao Clinic, Thailand</div>
+              <div class="exp-period">November 2024 — Present</div>
+              <div class="exp-desc">Designing and improving health information systems in a border health clinic serving migrant and displaced populations on the Thai-Myanmar border.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-icon">💼</div>
+            <div class="exp-body">
+              <div class="exp-title">Chief Health Information Officer &amp; Teleconsultant</div>
+              <div class="exp-org">FOC Teleclinic</div>
+              <div class="exp-period">2025</div>
+              <div class="exp-desc">Led health information management and teleconsultation services, improving data quality and clinical reporting for remote patient care.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-icon">💼</div>
+            <div class="exp-body">
+              <div class="exp-title">Freelance Data Analyst</div>
+              <div class="exp-org">Self-employed</div>
+              <div class="exp-period">3+ Years</div>
+              <div class="exp-desc">End-to-end data analysis projects for public health and research clients. Specialised in R, Python, SQL, Power BI, and Looker Studio dashboards.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-icon">💼</div>
+            <div class="exp-body">
+              <div class="exp-title">Academic Manager (Medical)</div>
+              <div class="exp-org">Burma Academy</div>
+              <div class="exp-period">2022 — 2024</div>
+              <div class="exp-desc">Managed medical education programmes, curriculum development, and academic operations for medical students.</div>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-icon">💼</div>
+            <div class="exp-body">
+              <div class="exp-title">Public Health Practitioner</div>
+              <div class="exp-org">IDP Camps &amp; Border Areas, Myanmar</div>
+              <div class="exp-period">2020 — 2022</div>
+              <div class="exp-desc">Delivered public health services in internally displaced persons camps and border health settings under crisis conditions.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Certificates & Awards ─────────────────────────── -->
+        <div class="about-section-label" style="margin-top:48px;">Certificates &amp; Awards</div>
+        <div class="cert-grid">
+
+          <div class="cert-card">
+            <div class="cert-icon">📜</div>
+            <div>
+              <div class="cert-title">Google Data Analytics Certificate</div>
+              <div class="cert-issuer">Google · Coursera</div>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-icon">📜</div>
+            <div>
+              <div class="cert-title">Google Advanced Data Analytics Certificate</div>
+              <div class="cert-issuer">Google · Coursera</div>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-icon">📜</div>
+            <div>
+              <div class="cert-title">Google Project Management Certificate</div>
+              <div class="cert-issuer">Google · Coursera</div>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-icon">📜</div>
+            <div>
+              <div class="cert-title">Health Informatics Certificate</div>
+              <div class="cert-issuer">Johns Hopkins University</div>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-icon">📜</div>
+            <div>
+              <div class="cert-title">Associate Data Scientist in R</div>
+              <div class="cert-issuer">DataCamp</div>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-icon">📜</div>
+            <div>
+              <div class="cert-title">Data Analyst in R, Python, SQL, Power BI &amp; Tableau</div>
+              <div class="cert-issuer">DataCamp</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         DASHBOARD PAGE
+    ══════════════════════════════════════════════════════════ -->
+    <section id="page-dashboard" class="page" aria-label="Dashboard">
+      <div class="page-header">
+        <div class="page-tag">// dashboard.py</div>
+        <h2 class="page-title">Dashboard</h2>
+        <p class="page-subtitle">Live metrics and monitoring across active projects and systems.</p>
+      </div>
+      <div class="page-body">
+
+        <!-- KPI strip -->
+        <div class="dashboard-top">
+          <div class="kpi-card">
+            <div class="kpi-label">Dashboards</div>
+            <div class="kpi-value">7</div>
+            <div class="kpi-delta delta-up">↑ Looker Studio &amp; Tableau</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">ASEAN Countries</div>
+            <div class="kpi-value">10</div>
+            <div class="kpi-delta delta-up">↑ Covered in health dashboards</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">WHO Indicators</div>
+            <div class="kpi-value">56</div>
+            <div class="kpi-delta delta-up">↑ In ASEAN Health Dashboard</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Vaccine Types</div>
+            <div class="kpi-value">14</div>
+            <div class="kpi-delta delta-up">↑ UNICEF ASEAN Coverage</div>
+          </div>
+        </div>
+
+        <!-- Dashboard cards -->
+        <div class="card-grid">
+
+          <!-- Card 1: COVID-19 Dashboard -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-red">🦠</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">COVID-19 Analytics Dashboard</div>
+            <div class="card-desc">Interactive visualization of confirmed cases, recoveries, and deaths across 8 countries from Jan 2020 to Apr 2022. Built with Looker Studio.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:30%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+              <div class="bar" style="height:55%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+              <div class="bar" style="height:80%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+              <div class="bar" style="height:100%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+              <div class="bar" style="height:75%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+              <div class="bar" style="height:60%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+              <div class="bar" style="height:45%; background:linear-gradient(180deg,var(--danger),rgba(240,90,74,.2))"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Looker Studio</span>
+              <span class="meta-tag">8 Countries</span>
+              <span class="meta-tag">2020–2022</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="COVID_19_Dashboard.html" target="_blank">↗ View Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Card 2: Myanmar Census 2014 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-amber">🗺️</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">Myanmar Census 2014 Dashboard</div>
+            <div class="card-desc">Demographic, literacy, citizenship, and sanitation insights across Myanmar regions from the 2014 national census. Source: DOP Myanmar.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:60%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:45%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:80%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:55%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:70%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:90%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Looker Studio</span>
+              <span class="meta-tag">Demographics</span>
+              <span class="meta-tag">Myanmar</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="Myanmar_Census_2014_Dashboard.html" target="_blank">↗ View Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Card 3: WHO ASEAN Health Indicators -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-green">🏥</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">ASEAN Health Indicator Dashboard</div>
+            <div class="card-desc">56 WHO health indicators compared across 10 ASEAN countries. Filter by indicator, country, year, sex, or age group. Source: WHO GHO.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:50%"></div>
+              <div class="bar" style="height:75%"></div>
+              <div class="bar" style="height:60%"></div>
+              <div class="bar" style="height:90%"></div>
+              <div class="bar" style="height:70%"></div>
+              <div class="bar" style="height:85%"></div>
+              <div class="bar" style="height:65%"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Looker Studio</span>
+              <span class="meta-tag">WHO</span>
+              <span class="meta-tag">56 Indicators</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="WHO_Stat_ASEAN_2024_Dashboard.html" target="_blank">↗ View Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Card 4: Vaccine Coverage ASEAN -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-purple">💉</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">Vaccine Coverage ASEAN Dashboard</div>
+            <div class="card-desc">14 vaccine types across 10 ASEAN countries with trend data from 2000 to latest year. Source: UNICEF immunization data.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:40%; background:linear-gradient(180deg,var(--accent2),rgba(123,97,255,.2))"></div>
+              <div class="bar" style="height:65%; background:linear-gradient(180deg,var(--accent2),rgba(123,97,255,.2))"></div>
+              <div class="bar" style="height:80%; background:linear-gradient(180deg,var(--accent2),rgba(123,97,255,.2))"></div>
+              <div class="bar" style="height:90%; background:linear-gradient(180deg,var(--accent2),rgba(123,97,255,.2))"></div>
+              <div class="bar" style="height:85%; background:linear-gradient(180deg,var(--accent2),rgba(123,97,255,.2))"></div>
+              <div class="bar" style="height:95%; background:linear-gradient(180deg,var(--accent2),rgba(123,97,255,.2))"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Looker Studio</span>
+              <span class="meta-tag">UNICEF</span>
+              <span class="meta-tag">14 Vaccines</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="Vac_Unicef_ASEAN_Dashboard.html" target="_blank">↗ View Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Card 5: Bangkok Airbnb -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-blue">🏙️</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">Bangkok Airbnb Market Dashboard</div>
+            <div class="card-desc">Room type distribution, availability, host listings, and price by neighborhood. Dataset: 23,651 observations. Source: Inside Airbnb.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:55%; background:linear-gradient(180deg,rgba(74,160,240,1),rgba(74,160,240,.2))"></div>
+              <div class="bar" style="height:70%; background:linear-gradient(180deg,rgba(74,160,240,1),rgba(74,160,240,.2))"></div>
+              <div class="bar" style="height:45%; background:linear-gradient(180deg,rgba(74,160,240,1),rgba(74,160,240,.2))"></div>
+              <div class="bar" style="height:85%; background:linear-gradient(180deg,rgba(74,160,240,1),rgba(74,160,240,.2))"></div>
+              <div class="bar" style="height:60%; background:linear-gradient(180deg,rgba(74,160,240,1),rgba(74,160,240,.2))"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Looker Studio</span>
+              <span class="meta-tag">23,651 Records</span>
+              <span class="meta-tag">Bangkok</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="Bangkok_Airbnb_Dashboard.html" target="_blank">↗ View Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Card 6: WDI ASEAN -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-green">🌐</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">WDI Statistics ASEAN Dashboard</div>
+            <div class="card-desc">26 World Bank development indicators across ASEAN countries with trend analysis from 1960 to present. Source: World Bank WDI.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:30%"></div>
+              <div class="bar" style="height:50%"></div>
+              <div class="bar" style="height:65%"></div>
+              <div class="bar" style="height:78%"></div>
+              <div class="bar" style="height:88%"></div>
+              <div class="bar" style="height:95%"></div>
+              <div class="bar" style="height:100%"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Looker Studio</span>
+              <span class="meta-tag">World Bank</span>
+              <span class="meta-tag">26 Indicators</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="WDI_ASEAN_Dashboard.html" target="_blank">↗ View Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Card 7: World Malaria Tableau -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon icon-amber">🦟</div>
+              <span class="card-badge badge-live">Live</span>
+            </div>
+            <div class="card-title">World Malaria 2023 Dashboard</div>
+            <div class="card-desc">Global malaria cases and deaths from 2000–2023 using WHO data. Built in Tableau with interactive maps and trend analysis.</div>
+            <div class="chart-row">
+              <div class="bar" style="height:100%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:85%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:70%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:55%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+              <div class="bar" style="height:45%; background:linear-gradient(180deg,var(--accent3),rgba(240,162,74,.2))"></div>
+            </div>
+            <div class="card-meta">
+              <span class="meta-tag">Tableau</span>
+              <span class="meta-tag">WHO</span>
+              <span class="meta-tag">2000–2023</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="https://public.tableau.com/views/Malaria_Dashboard/Malaria?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">↗ Open in Tableau</a>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         DATA PROJECTS PAGE
+    ══════════════════════════════════════════════════════════ -->
+    <section id="page-projects" class="page" aria-label="Data Projects">
+      <div class="page-header">
+        <div class="page-tag">// projects/</div>
+        <h2 class="page-title">Data Projects</h2>
+        <p class="page-subtitle">Step-by-step data analysis using R and Python — from import to insight.</p>
+      </div>
+      <div class="page-body">
+
+        <!-- Filter tabs -->
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+          <button class="filter-btn" onclick="setFilter(this,'ml')">Machine Learning</button>
+          <button class="filter-btn" onclick="setFilter(this,'viz')">Visualisation</button>
+          <button class="filter-btn" onclick="setFilter(this,'health')">Public Health</button>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- Project 1: Diabetes Classification -->
+          <div class="card" data-cat="ml">
+            <div class="card-header">
+              <div class="card-icon icon-green">🧠</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Diabetes Classification Using Random Forest</div>
+            <div class="card-desc">Classification of diabetes using random forest in R. Explores the interplay between lifestyle factors and diabetes risk. Includes feature importance analysis.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">Random Forest</span>
+              <span class="meta-tag">ML</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="dm_project.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 2: Airbnb Bangkok -->
+          <div class="card" data-cat="viz">
+            <div class="card-header">
+              <div class="card-icon icon-blue">🏙️</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Airbnb Bangkok Market Analysis</div>
+            <div class="card-desc">Data cleaning and analysis of 23,651 Bangkok Airbnb listings using R. Explores room types, short vs long-term rentals, hosts, and neighborhood pricing.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">ggplot2</span>
+              <span class="meta-tag">23,651 Records</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="airbnb_bkk.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 3: Maternal Health Risk -->
+          <div class="card" data-cat="ml health">
+            <div class="card-header">
+              <div class="card-icon icon-purple">🤰</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Maternal Health Risk Classification</div>
+            <div class="card-desc">Classification of maternal health risk using random forest and logistic regression in R. Addresses a critical global public health challenge in low-resource settings.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">Random Forest</span>
+              <span class="meta-tag">Logistic Regression</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="mh_risk.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 4: Heart Disease -->
+          <div class="card" data-cat="ml health">
+            <div class="card-header">
+              <div class="card-icon icon-red">❤️</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Heart Disease Classification</div>
+            <div class="card-desc">Logistic regression model to identify predictors of heart disease. Uses stepwise, forward, and backward variable selection. Evaluates via confusion matrix. (DataCamp)</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">Logistic Regression</span>
+              <span class="meta-tag">Classification</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="hd_ds.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 5: COVID-19 Impact US Hospitals -->
+          <div class="card" data-cat="health viz">
+            <div class="card-header">
+              <div class="card-icon icon-amber">🏥</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">COVID-19 Impact on U.S. Hospitals</div>
+            <div class="card-desc">R-based exploration of inpatient and ICU utilization during the pandemic. Dataset from U.S. Dept. of Health &amp; Human Services — 1,045,406 observations, 128 variables.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">1M+ Records</span>
+              <span class="meta-tag">HHS Data</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="covid_19_impact_US_hospitals.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 6: ASEAN Vaccine Coverage -->
+          <div class="card" data-cat="health viz">
+            <div class="card-header">
+              <div class="card-icon icon-green">💉</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">ASEAN Vaccine Coverage Trends</div>
+            <div class="card-desc">Python visualization of 14 vaccine coverage types across 10 ASEAN countries (2000–2023). Data pivoted from long to wide format; visualized using Seaborn.</div>
+            <div class="card-meta">
+              <span class="meta-tag">Python</span>
+              <span class="meta-tag">Seaborn</span>
+              <span class="meta-tag">UNICEF</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="asean_vaccine_coverage.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 7: WHO Health Statistics -->
+          <div class="card" data-cat="health viz">
+            <div class="card-header">
+              <div class="card-icon icon-purple">📊</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">WHO Health Statistics: ASEAN &amp; Myanmar</div>
+            <div class="card-desc">Intermediate R analysis of WHO health statistics across four datasets. Identifies ASEAN health indicators using custom functions and intermediate R techniques.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">WHO Data</span>
+              <span class="meta-tag">ASEAN</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="who_stat_asean_mmr.html" target="_blank">↗ View Project</a>
+            </div>
+          </div>
+
+          <!-- Project 8: Flight Duration -->
+          <div class="card" data-cat="viz">
+            <div class="card-header">
+              <div class="card-icon icon-blue">✈️</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Flight Duration Trends Analysis</div>
+            <div class="card-desc">Analysis of flight data to uncover duration patterns and global air travel efficiency using R. Hosted on DataCamp DataLab.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">DataCamp</span>
+              <span class="meta-tag">EDA</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="https://www.datacamp.com/datalab/w/4d771fe4-2eb6-48cb-8449-5513520c9c77/edit#526d1406-8b28-4310-96d7-cd9d299b28bc" target="_blank" rel="noopener noreferrer">↗ Open on DataCamp</a>
+            </div>
+          </div>
+
+          <!-- Project 9: Nobel Prize Winners -->
+          <div class="card" data-cat="viz">
+            <div class="card-header">
+              <div class="card-icon icon-amber">🏆</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Nobel Prize Winners Analysis</div>
+            <div class="card-desc">Using R and SQL to analyze Nobel laureates' achievements and demographic patterns across decades. Hosted on DataCamp DataLab.</div>
+            <div class="card-meta">
+              <span class="meta-tag">R</span>
+              <span class="meta-tag">SQL</span>
+              <span class="meta-tag">DataCamp</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="https://www.datacamp.com/datalab/w/c7e454b0-2305-43cf-8067-bed62faf35a7/edit" target="_blank" rel="noopener noreferrer">↗ Open on DataCamp</a>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         RESEARCH PAGE
+    ══════════════════════════════════════════════════════════ -->
+    <section id="page-research" class="page" aria-label="Research">
+      <div class="page-header">
+        <div class="page-tag">// research/publications</div>
+        <h2 class="page-title">Research</h2>
+        <p class="page-subtitle">Peer-reviewed publications in public health, tropical diseases, and digital health.</p>
+      </div>
+      <div class="page-body">
+
+        <!-- Search bar -->
+        <div class="search-row">
+          <input class="search-input" type="search" placeholder="Search papers, keywords, journals…" oninput="filterResearch(this.value)" />
+        </div>
+
+        <div class="card-grid" id="research-grid">
+
+          <!-- Paper 1: Otitis Research — published -->
+          <div class="card" data-keywords="otitis media bacteriology antimicrobial myanmar mandalay ENT">
+            <div class="card-header">
+              <div class="card-icon icon-green">📄</div>
+              <span class="card-badge badge-live">Published</span>
+            </div>
+            <div class="card-title">Bacteriologic Profile and Antimicrobial Susceptibility of Chronic Suppurative Otitis Media</div>
+            <div class="card-desc">International Journal of Microbiology, Mycology &amp; Tropical Diseases. Analyzes bacteriologic profile and antimicrobial susceptibility patterns of CSOM in Mandalay, Myanmar.</div>
+            <div class="card-meta">
+              <span class="meta-tag">Microbiology</span>
+              <span class="meta-tag">Myanmar</span>
+              <span class="meta-tag">ENT</span>
+            </div>
+            <div class="card-actions">
+              <a class="card-btn primary" href="https://ijmmtd.org/ahead/15289" target="_blank" rel="noopener noreferrer">↗ Read in Journal</a>
+            </div>
+          </div>
+
+          <!-- Placeholder: future research card -->
+          <div class="card" data-keywords="health informatics digital health telemedicine">
+            <div class="card-header">
+              <div class="card-icon icon-purple">📄</div>
+              <span class="card-badge badge-wip">In Progress</span>
+            </div>
+            <div class="card-title">Health Information Systems in Border &amp; Crisis Settings</div>
+            <div class="card-desc">Ongoing work from experience at Mae Tao Clinic and IDP camps — examining HIS implementation, data quality, and digital health interventions in low-resource environments.</div>
+            <div class="card-meta">
+              <span class="meta-tag">HIS</span>
+              <span class="meta-tag">Digital Health</span>
+              <span class="meta-tag">Crisis Settings</span>
+            </div>
+            <div class="card-actions">
+              <button class="card-btn primary" onclick="openModal('paper_his')">⊞ View Details</button>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============================================================
+     MODAL OVERLAY  — used for all "View Details / View Project /
+     View Abstract" buttons that open an internal page rather than
+     an external URL.
+============================================================ -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+     onclick="closeModalOnBackdrop(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="page-tag" id="modal-tag">// detail</div>
+        <h2 class="page-title" id="modal-title" style="font-size:22px"></h2>
+      </div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close modal">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT — navigation, modals, filters, search
+============================================================ -->
+<script>
+  // ============================================================
+  // PAGE NAVIGATION
+  // Shows the target page and marks the clicked nav link active.
+  // ============================================================
+  function showPage(id, btn) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Remove active from all nav links
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.classList.remove('active');
+      l.removeAttribute('aria-current');
+    });
+
+    // Show target page
+    document.getElementById('page-' + id).classList.add('active');
+
+    // Mark clicked nav button as active
+    if (btn) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-current', 'page');
+    } else {
+      // Fallback: find nav button by its onclick content
+      document.querySelectorAll('.nav-link').forEach(l => {
+        if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + id + "'")) {
+          l.classList.add('active');
+          l.setAttribute('aria-current', 'page');
+        }
+      });
+    }
+
+    // Close sidebar on mobile after navigation
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  // ============================================================
+  // MOBILE SIDEBAR TOGGLE
+  // ============================================================
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // ============================================================
+  // MODAL SYSTEM
+  // Each modal ID maps to a content definition object.
+  // Some cards use openModal() → internal modal
+  // Others use direct <a href> → external URL (see HTML above)
+  // ============================================================
+
+  /** Content registry for all internal modals */
+  const modals = {
+
+    // ── Research modals ───────────────────────────────────────
+    paper_his: {
+      tag: 'Research · Health Informatics',
+      title: 'Health Information Systems in Border & Crisis Settings',
+      body: `
+        <p>This ongoing research draws from firsthand experience as <strong>HIS Technical Consultant at Mae Tao Clinic</strong>
+           and as a Public Health Practitioner in IDP camps and border areas of Myanmar (2020–2022).</p>
+        <h3>Focus Areas</h3>
+        <ul>
+          <li>Implementing and improving HIS in resource-constrained environments</li>
+          <li>Data quality improvement strategies in crisis settings</li>
+          <li>Telemedicine and teleconsultation infrastructure for displaced populations</li>
+          <li>Digital health interventions for border health clinics</li>
+        </ul>
+        <h3>Background</h3>
+        <p>Mae Tao Clinic serves tens of thousands of migrant and displaced patients on the Thai-Myanmar border.
+           As Technical Consultant, this work focuses on bridging clinical data needs with practical HIS design
+           under real-world constraints common to humanitarian health settings.</p>`,
+      footer: `
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/aungthurahtoo" target="_blank" rel="noopener noreferrer">↗ Connect on LinkedIn</a>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>`
+    }
+
+  };
+
+  // ── Open a modal by ID ──────────────────────────────────────
+  function openModal(id) {
+    const def = modals[id];
+    if (!def) return;
+
+    document.getElementById('modal-tag').textContent   = def.tag;
+    document.getElementById('modal-title').textContent = def.title;
+    document.getElementById('modal-body').innerHTML    = def.body;
+    document.getElementById('modal-footer').innerHTML  = def.footer;
+
+    const overlay = document.getElementById('modal-overlay');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent background scroll
+  }
+
+  // ── Close modal ─────────────────────────────────────────────
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal when clicking outside the modal box
+  function closeModalOnBackdrop(event) {
+    if (event.target === document.getElementById('modal-overlay')) {
+      closeModal();
+    }
+  }
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ============================================================
+  // FILTER BUTTONS (Data Projects page)
+  // Hides cards that don't match the selected category.
+  // ============================================================
+  function setFilter(btn, cat) {
+    // Update button states
+    btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide cards based on data-cat attribute
+    document.querySelectorAll('#page-projects .card').forEach(card => {
+      const cardCat = card.dataset.cat || 'all';
+      card.style.display = (cat === 'all' || cardCat === cat) ? '' : 'none';
+    });
+  }
+
+  // ============================================================
+  // RESEARCH SEARCH
+  // Simple keyword filter on research card text and data-keywords.
+  // ============================================================
+  function filterResearch(query) {
+    const q = query.toLowerCase().trim();
+    document.querySelectorAll('#research-grid .card').forEach(card => {
+      const text    = card.textContent.toLowerCase();
+      const kw      = (card.dataset.keywords || '').toLowerCase();
+      const visible = !q || text.includes(q) || kw.includes(q);
+      card.style.display = visible ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
