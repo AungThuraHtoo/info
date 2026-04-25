@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WDI Statistics ASEAN Dashboard — Aung Thura Htoo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/pro_pic2.jpg" type="image/jpeg">
+  <style>
+    :root{--bg:#faf7f2;--surface:#ffffff;--surface2:#f5f0e8;--border:#e8dfd0;--border2:#d4c9b5;--accent:#c0622a;--accent-light:#f0ebe3;--accent2:#7a6e5f;--accent3:#d4923c;--accent4:#5a7a6e;--text:#2c2416;--text2:#4a3f30;--muted:#9a8f80;--muted2:#c4b9a8;--font-display:'Lora',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',monospace;--radius:10px;--radius-sm:6px;--transition:0.22s cubic-bezier(0.4,0,0.2,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.7;min-height:100vh;overflow-x:hidden}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+    .top-nav{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px}
+    .top-nav-left{display:flex;align-items:center;gap:18px}
+    .back-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:99px;border:1.5px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--font-body);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:all var(--transition)}
+    .back-btn:hover{background:var(--surface2);border-color:var(--accent2)}
+    .nav-divider{width:1px;height:22px;background:var(--border)}
+    .nav-brand-name{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--text)}
+    .nav-brand-role{font-size:11.5px;color:var(--muted);font-family:var(--font-body)}
+    .nav-monogram{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--accent3));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+    .nav-links-right{display:flex;align-items:center;gap:4px}
+    .nav-link-item{padding:6px 14px;border-radius:var(--radius-sm);color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;font-family:var(--font-body);transition:background var(--transition),color var(--transition)}
+    .nav-link-item:hover{background:var(--surface2);color:var(--text2)}
+    .page-wrapper{max-width:980px;margin:0 auto;padding:56px 40px 80px}
+    .subpage-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-family:var(--font-body);font-weight:500}
+    .subpage-title{font-family:var(--font-display);font-size:clamp(24px,3vw,38px);font-weight:700;line-height:1.2;letter-spacing:-0.5px;color:var(--text);margin-bottom:16px}
+    .subpage-desc{color:var(--text2);font-size:15px;line-height:1.85;max-width:720px;margin-bottom:40px;font-family:var(--font-body)}
+    .header-rule{border:none;border-top:1px solid var(--border);margin-bottom:40px}
+    .content-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:20px}
+    .content-card iframe{width:100%;border:none;border-radius:calc(var(--radius) - 2px);box-shadow:0 4px 16px rgba(44,36,22,.08);transition:box-shadow var(--transition)}
+    .content-card iframe:hover{box-shadow:0 8px 28px rgba(44,36,22,.13)}
+    .action-row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:99px;background:var(--accent);color:#fff;font-family:var(--font-body);font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all var(--transition)}
+    .btn-primary:hover{background:#a8531f;box-shadow:0 4px 20px rgba(192,98,42,.3)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:99px;background:transparent;color:var(--text2);border:1.5px solid var(--border2);font-family:var(--font-body);font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:all var(--transition)}
+    .btn-ghost:hover{background:var(--surface2);border-color:var(--accent2)}
+    .site-footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted);font-family:var(--font-body)}
+    .footer-left{display:flex;align-items:center;gap:6px}
+    .footer-dot{width:4px;height:4px;border-radius:50%;background:var(--border2)}
+    .footer-links{display:flex;gap:16px}
+    .footer-links a{color:var(--muted);text-decoration:none;transition:color var(--transition)}
+    .footer-links a:hover{color:var(--accent)}
+    @media(max-width:700px){.top-nav{padding:0 20px}.nav-links-right{display:none}.page-wrapper{padding:36px 20px 60px}.site-footer{padding:20px;flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-left">
+      <a href="../index.html" class="back-btn">← Back</a>
+      <div class="nav-divider"></div>
+      <div class="nav-monogram">AT</div>
+      <div>
+        <div class="nav-brand-name">Aung Thura Htoo</div>
+        <div class="nav-brand-role">Public Health Analyst</div>
+      </div>
+    </div>
+    <div class="nav-links-right">
+      <a href="../index.html" class="nav-link-item">Home</a>
+    </div>
+  </nav>
+  <div class="page-wrapper">
+    <div class="subpage-tag">Dashboard · Looker Studio · World Bank</div>
+    <h1 class="subpage-title">WDI Statistics ASEAN Dashboard</h1>
+    <p class="subpage-desc">These dashboards provide insights on 26 selected World Bank development indicators and their comparison among 10 ASEAN countries. The audience can choose indicator type, ASEAN country, and specific year. The second dashboard highlights the trend of WDI indicators from 1960 to the latest year. Data source: World Bank WDI Databank.</p>
+    <hr class="header-rule" />
+    <div class="content-card">
+      <iframe src="https://lookerstudio.google.com/embed/reporting/61844155-af70-422e-93e0-e715d51a06c5/page/D8CAE"
+              frameborder="0" allowfullscreen height="480"
+              sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
+      <iframe src="https://lookerstudio.google.com/embed/reporting/61844155-af70-422e-93e0-e715d51a06c5/page/p_zwt7bdojkd"
+              frameborder="0" allowfullscreen height="480"
+              sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-left">
+      <span>© Aung Thura Htoo</span>
+      <span class="footer-dot"></span>
+      <span>Public Health Analyst</span>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:thurahtoo.ath2010@gmail.com">Contact</a>
+      <a href="https://www.linkedin.com/in/aungthurahtoo" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <a href="https://github.com/AungThuraHtoo" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </div>
+  </footer>
+</body>
+</html>
