@@ -558,6 +558,46 @@
       font-family: var(--font-body);
     }
 
+    /* ── Awards grid ───────────────────────────────────────── */
+    .award-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .award-item {
+      display: flex;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .award-item:last-child { border-bottom: none; }
+    .award-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, rgba(212,146,60,.15), rgba(192,98,42,.12));
+      border: 1px solid rgba(212,146,60,.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .award-body { flex: 1; }
+    .award-title {
+      font-family: var(--font-display);
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .award-issuer {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent3);
+      font-family: var(--font-body);
+    }
+
     /* ── Books page ────────────────────────────────────────── */
     .book-list {
       display: flex;
@@ -1088,7 +1128,7 @@
         <div class="about-section-label">Introduction</div>
         <div class="about-bio-grid">
           <div class="about-text">
-            <p>Hi — I'm <strong>Aung Thura Htoo</strong>, a public health practitioner and data analyst based in Thailand. I hold an MD and a Bachelor of Health Science, and I'm currently pursuing an MSc in Biomedical &amp; Health Informatics at Mahidol University.</p>
+            <p>Hi — I'm <strong>Aung Thura Htoo</strong>, a public health practitioner and data analyst based in Thailand. I hold an MD and a Bachelor of Science in Health Science, and I'm currently pursuing an MSc in Biomedical &amp; Health Informatics at Mahidol University.</p>
             <p>My work spans <strong>health information systems</strong>, telemedicine, and interactive data analytics. I've worked in IDP camps and border health settings, and I currently serve as a Health Information System Technical Consultant at Mae Tao Clinic.</p>
             <p>I'm skilled in improving <strong>data quality, clinical reporting, and decision-making</strong> using R, SQL, Power BI, and Looker Studio. I care deeply about applying data science to real-world public health challenges in low-resource and crisis settings.</p>
           </div>
@@ -1116,7 +1156,7 @@
           <div class="exp-item">
             <div class="exp-icon">🎓</div>
             <div class="exp-body">
-              <div class="exp-title">MSc Biomedical &amp; Health Informatics</div>
+              <div class="exp-title">Master of Science in Biomedical &amp; Health Informatics</div>
               <div class="exp-org">Mahidol University, Thailand</div>
               <div class="exp-period">2024 — Present</div>
               <div class="exp-desc">Specialising in health information systems, digital health, and biomedical data analytics.</div>
@@ -1126,8 +1166,8 @@
           <div class="exp-item">
             <div class="exp-icon">🎓</div>
             <div class="exp-body">
-              <div class="exp-title">Bachelor of Health Science (BS HS)</div>
-              <div class="exp-org">University of the People</div>
+              <div class="exp-title">Bachelor of Science in Health Science (Bsc HS)</div>
+              <div class="exp-org">University of the People, USA</div>
               <div class="exp-period">2022 — 2024</div>
               <div class="exp-desc">CGPA 3.78 / 4.00. Focused on public health, epidemiology, and health systems management.</div>
             </div>
@@ -1201,8 +1241,38 @@
 
         </div>
 
-        <!-- ── Certificates & Awards ─────────────────────────── -->
-        <div class="about-section-label" style="margin-top:48px;">Certificates &amp; Awards</div>
+        <!-- ── Awards ────────────────────────────────────────── -->
+        <div class="about-section-label" style="margin-top:48px;">Awards &amp; Scholarships</div>
+        <div class="award-grid">
+
+          <div class="award-item">
+            <div class="award-icon">🏆</div>
+            <div class="award-body">
+              <div class="award-title">Full Scholarship — Bachelor of Science in Health Science</div>
+              <div class="award-issuer">University of the People</div>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-icon">🏆</div>
+            <div class="award-body">
+              <div class="award-title">Erasmus+ Scholarship — Internship in Germany</div>
+              <div class="award-issuer">University of Bremen</div>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-icon">🏆</div>
+            <div class="award-body">
+              <div class="award-title">Postgraduate Mobility Scholarship</div>
+              <div class="award-issuer">Mahidol University</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Certificates ───────────────────────────────────── -->
+        <div class="about-section-label" style="margin-top:48px;">Certificates</div>
         <div class="cert-grid">
 
           <div class="cert-card">
